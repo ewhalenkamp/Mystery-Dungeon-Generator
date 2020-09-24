@@ -1,0 +1,38 @@
+for (int j=0;j<obj1.getrSeenList().get(i).getCorridorList().size();j++) {
+                        StdDraw.setPenRadius(.0025);
+                        StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
+                        
+                        xc1 = player.getx()+(relativePlayerx + obj1.getrSeenList().get(i).getCorridorList().get(j).getxc1()*smallc);
+                        xc2 = player.getx()+(relativePlayerx + obj1.getrSeenList().get(i).getCorridorList().get(j).getxc2()*smallc);
+                        yc1 = player.gety()+(relativePlayery + obj1.getrSeenList().get(i).getCorridorList().get(j).getyc1()*smallc);
+                        yc2 = player.gety()+(relativePlayery + obj1.getrSeenList().get(i).getCorridorList().get(j).getyc2()*smallc);
+                        playerx = player.getx()*smallc+player.getx()+relativePlayerx+12.5*smallc;
+                        playery = player.gety()*smallc+player.gety()+relativePlayery+12.5*smallc;
+                        
+                        if (xc1 == xc2 && (Math.abs(yc1-playery) < Math.abs(yc2-playery) || obj1.getrSeenList().get(i).nubMarker1 == true)) {
+                            StdDraw.setPenColor(StdDraw.BLUE);
+                            obj1.getrSeenList().get(i).nubMarker1 = true;
+                            StdDraw.filledRectangle(xc1,yc2-15*smallc,10.7*smallc,15*smallc);
+                        }
+                        if (xc1 == xc2 && (Math.abs(yc1-playery) > Math.abs(yc2-playery) || obj1.getrSeenList().get(i).nubMarker2 == true)) {
+                            StdDraw.setPenColor(StdDraw.RED);
+                            obj1.getrSeenList().get(i).nubMarker2 = true;
+                            StdDraw.filledRectangle(xc1,yc1,10.7*smallc,14*smallc);
+                        }
+                        if (yc1 == yc2 && (Math.abs(xc1-playerx) < Math.abs(xc2-playerx) || obj1.getrSeenList().get(i).nubMarker3 == true)) {
+                            StdDraw.setPenColor(StdDraw.YELLOW);
+                            obj1.getrSeenList().get(i).nubMarker3 = true;
+                            StdDraw.filledRectangle(xc2-15*smallc,yc2,15*smallc,10.7*smallc);
+                        }
+                        if (yc1 == yc2 && (Math.abs(xc1-playerx) > Math.abs(xc2-playerx) || obj1.getrSeenList().get(i).nubMarker4 == true)) {
+                            StdDraw.setPenColor(StdDraw.PINK);
+                            obj1.getrSeenList().get(i).nubMarker4 = true;
+                            StdDraw.filledRectangle(xc1-15*smallc,yc2,15*smallc,10.7*smallc);
+                        }
+                            
+                            
+                            
+                            
+                        
+                        
+                    }

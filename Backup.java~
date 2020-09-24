@@ -1,0 +1,168 @@
+import java.util.*;
+import java.io.*;
+public class Backup {
+    
+    private ArrayList<Room> roomList = new ArrayList<Room>();
+    
+    public CorridorGenerator(ArrayList<Room> roomList){
+        this.roomList = roomList;
+    }
+    
+    
+    public void createLines(Room currentRoom) {
+        for (int h=0;h<this.roomList.size();h++) {
+            Room potentialRoom = this.roomList.get(h);
+            double tempShortest = 100000;
+            int xc1 = 0;
+            int yc1 = 0;
+            int xc2 = 0;
+            int yc2 = 0;
+            
+            //right wall
+            if (potentialRoom.getxFirst() - currentRoom.getxSecond() > potentialRoom.getyFirst() - currentRoom.getySecond()){
+                if (potentialRoom.getxFirst() - currentRoom.getxSecond() > currentRoom.getyFirst() - potentialRoom.getySecond()) {
+                    if (potentialRoom.getxFirst() - currentRoom.getxSecond() > currentRoom.getxFirst() - potentialRoom.getxSecond()) {
+                        for (int i=currentRoom.getyFirst();i<currentRoom.getySecond();i+=25) {
+                            for (int j=potentialRoom.getyFirst();j<potentialRoom.getySecond();j+=25) {
+                                if ((Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2)) <= tempShortest) {
+                                    tempShortest = Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2);
+                                    xc1 = currentRoom.getxSecond();
+                                    yc1 = i;
+                                    xc2 = potentialRoom.getxFirst();
+                                    yc2 = j;
+                                }
+                            }
+                        }
+                        tempShortest = 100000;
+                        if (xc1 != 0 || xc2 != 0 || yc1 != 0 || yc2 != 0) {
+                            if (!doesIntersect(xc1,yc1,xc2,yc2)) {
+                                StdDraw.line(xc1,yc1,xc2,yc2);
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            //left wall
+            if (currentRoom.getxFirst() - potentialRoom.getxSecond() > potentialRoom.getyFirst() - currentRoom.getySecond()){
+                if (currentRoom.getxFirst() - potentialRoom.getxSecond() > currentRoom.getyFirst() - potentialRoom.getySecond()) {
+                    if (potentialRoom.getxFirst() - currentRoom.getxSecond() < currentRoom.getxFirst() - potentialRoom.getxSecond()) {
+                        for (int i=currentRoom.getyFirst();i<currentRoom.getySecond();i+=25) {
+                            for (int j=potentialRoom.getyFirst();j<potentialRoom.getySecond();j+=25) {
+                                if ((Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2)) <= tempShortest) {
+                                    tempShortest = Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2);
+                                    xc1 = currentRoom.getxFirst();
+                                    yc1 = i;
+                                    xc2 = potentialRoom.getxSecond();
+                                    yc2 = j;
+                                }
+                            }
+                        }
+                        tempShortest = 100000;
+                        if (xc1 != 0 || xc2 != 0 || yc1 != 0 || yc2 != 0) {
+                            if (!doesIntersect(xc1,yc1,xc2,yc2)) {
+                                StdDraw.line(xc1,yc1,xc2,yc2);
+                            }
+                        }
+                    }
+                }
+            }
+            //bottom wall
+            if (currentRoom.getyFirst() - potentialRoom.getySecond() > potentialRoom.getxFirst() - currentRoom.getxSecond()){
+                if (currentRoom.getxFirst() - potentialRoom.getySecond() > currentRoom.getxFirst() - potentialRoom.getxSecond()) {
+                    if (currentRoom.getyFirst() - potentialRoom.getySecond() > potentialRoom.getyFirst() - currentRoom.getySecond()) {
+                        for (int i=currentRoom.getxFirst();i<currentRoom.getxSecond();i+=25) {
+                            for (int j=potentialRoom.getxFirst();j<potentialRoom.getxSecond();j+=25) {
+                                if ((Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2)) <= tempShortest) {
+                                    tempShortest = Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2);
+                                    xc1 = j;
+                                    yc1 = potentialRoom.getySecond();
+                                    xc2 = i;
+                                    yc2 = currentRoom.getyFirst();
+                                }
+                            }
+                        }
+                        tempShortest = 100000;
+                        if (xc1 != 0 || xc2 != 0 || yc1 != 0 || yc2 != 0) {
+                            if (!doesIntersect(xc1,yc1,xc2,yc2)) {
+                                StdDraw.line(xc1,yc1,xc2,yc2);
+                            }
+                        }
+                    }
+                }
+            }
+            //top wall
+            if (potentialRoom.getyFirst() - currentRoom.getySecond() > potentialRoom.getxFirst() - currentRoom.getxSecond()){
+                if (potentialRoom.getyFirst() - currentRoom.getySecond() > currentRoom.getxFirst() - potentialRoom.getxSecond()) {
+                    if (currentRoom.getyFirst() - potentialRoom.getySecond() < potentialRoom.getyFirst() - currentRoom.getySecond()) {
+                        for (int i=currentRoom.getxFirst();i<currentRoom.getxSecond();i+=25) {
+                            for (int j=potentialRoom.getxFirst();j<potentialRoom.getxSecond();j+=25) {
+                                if ((Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2)) <= tempShortest) {
+                                    tempShortest = Math.pow(potentialRoom.getxFirst()-currentRoom.getxSecond(), 2)+Math.pow((i-j), 2);
+                                    xc1 = i;
+                                    yc1 = currentRoom.getySecond();
+                                    xc2 = j;
+                                    yc2 = potentialRoom.getyFirst();
+                                }
+                            }
+                        }
+                        tempShortest = 100000;
+                        if (xc1 != 0 || xc2 != 0 || yc1 != 0 || yc2 != 0) {
+                            if (!doesIntersect(xc1,yc1,xc2,yc2)) {
+                                StdDraw.line(xc1,yc1,xc2,yc2);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public boolean doesIntersect(int xc1, int yc1, int xc2, int yc2) {
+        long rise = yc2-yc1;
+        long run = xc2-xc1;
+        long slope = 0;
+        if (xc1 != xc2)
+            slope = rise/run;          
+        Room currentRoom;
+        System.out.println(xc1+" "+yc1+" "+xc2+" "+yc2);
+        System.out.println(slope);
+        if (xc2 > xc1) {
+            for (int i=0;i<xc2-xc1;i++) {
+                for (int j=0;j<this.roomList.size();j++) {
+                    currentRoom = this.roomList.get(j);
+                    if (i+xc1 > currentRoom.getxFirst() && i+xc1 < currentRoom.getxSecond() && (i*slope)+yc1 > currentRoom.getyFirst() && (i*slope)+yc1 < currentRoom.getySecond()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        else if (xc1 > xc2) {
+            for (int i=0;i>xc2-xc1;i--) {
+                for (int j=0;j<this.roomList.size();j++) {
+                    currentRoom = this.roomList.get(j);
+                    if (i+xc1 > currentRoom.getxFirst() && i+xc1 < currentRoom.getxSecond() && (i*slope)+yc1 > currentRoom.getyFirst() && (i*slope)+yc1 < currentRoom.getySecond()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        else if (xc1 == xc2) {
+            for (int i=0;i<yc2-yc1;i++) {
+                for (int j=0;j<this.roomList.size();j++) {
+                    currentRoom = this.roomList.get(j);
+                    if (i > currentRoom.getyFirst() && i < currentRoom.getxSecond() && yc2 < currentRoom.getyFirst() && yc1 > currentRoom.getySecond()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+}
+
+
+
+
+
+

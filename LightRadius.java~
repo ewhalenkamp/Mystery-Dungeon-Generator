@@ -1,0 +1,19 @@
+public class LightRadius {
+    
+    
+    
+    public void drawRadius(Player player) {
+        StdDraw.setPenColor(StdDraw.WHITE);
+        
+        StdDraw.filledRectangle(player.getx()+12.5,player.gety()+12.5,60,20);
+        StdDraw.filledRectangle(player.getx()+12.5,player.gety()+12.5,20,60);
+        StdDraw.filledRectangle(player.getx()+12.5,player.gety()+12.5,50,40);
+        StdDraw.filledRectangle(player.getx()+12.5,player.gety()+12.5,40,50);
+    }
+    
+    public isSeenRoom(Player player, Corridor corridor) {
+        Room visionRadius1 = new Room(player.getx()+12.5,player.gety()+12.5,60,20);
+        Room visionRadius2 = new Room(player.getx()+12.5,player.gety()+12.5,20,60);
+        Room visionRadius3 = new Room(player.getx()+12.5,player.gety()+12.5,50,40);
+        Room visionRadius4 = new Room(player.getx()+12.5,player.gety()+12.5,40,50);
+    }

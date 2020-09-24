@@ -1,0 +1,7 @@
+public class generatePlayer {
+    
+    private ArrayList<Room> roomList = new ArrayList<Room>();
+    
+    public Character createCharacter(ArrayList<Room> roomList
+    
+}
