@@ -6,8 +6,10 @@ The use of random generation in creating each floor makes it so you'll never tra
 
 Controls:
 
-W - Up
-A - Left
-S - Down
-D - Right
-Hold Space - Run
+- W - Up
+- A - Left
+- S - Down
+- D - Right
+- Hold Space - Run
+
+Completed as a Fall 2019 term project for CS 160 at the University of Northern Colorado by Erik Halenkamp.
